@@ -10,7 +10,7 @@
    
    
    
-### Endpoints
+## Endpoints
 ***GET***<pre>  http://localhost:8080/                            - Small description of what the API is about <br></pre>
 ***POST***<pre> http://localhost:8080/categories                  - Create a category with relavent information <br></pre>
 ***GET***<pre>  http://localhost:8080/categories                  - Gets JSON representation of all the categories and information in the database <br></pre>
