@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Retrieval</title>
+</head>
+<body>
+  <h1>Update Retrieval</h1>
+  <form id="updateDisposal">
+    <label for="id">Category ID:</label>
+    <input type="number" id="id" name="id" required>
+    <br><br>
+    <label for="description">Retrieval:</label>
+    <input type="text" id="description" name="description" required>
+    <br><br>
+    <button type="button" onclick="send()">Submit</button>
+  </form>
+
+  <script>
+    function send() {
+      const id = document.getElementById('id').value;
+      const data = {
+        name: '',
+        description: '',
+        disposalGuidelines: '',
+        retrivalGuidelines: document.getElementById('description').value,
+        isRecyclable: ''
+      };
+
+      fetch(`/categories/update/disposal/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+        .then(response => response.json())
+        .then(data => alert('Update Successful: ' + JSON.stringify(data)))
+        .catch(error => alert('Error: ' + error.message));
+    }
+  </script>
+</body>
+</html>
