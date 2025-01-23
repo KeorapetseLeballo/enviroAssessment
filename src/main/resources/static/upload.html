@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Upload Waste Category</h1>
+    <form id="wasteCategoryForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" required><br><br>
+
+        <label for="disposalGuidelines">Disposal Guideline:</label>
+        <input type="text" id="disposalGuidelines" name="disposalGuidelines" required><br><br>
+
+        <label for="retrievalGuidelines">Retrieval Guideline:</label>
+        <input type="text" id="retrievalGuidelines" name="retrievalGuidelines" required><br><br>
+
+        <label for=""country>Recyclable</label>
+            <select name="recyclable" id="recyclable">
+               <option value="yes">Yes</option>
+               <option value="no">No</option>
+            </select> <br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        async function submitForm(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const description = document.getElementById('description').value;
+            const disposalGuidelines = document.getElementById('disposalGuidelines').value;
+            const retrievalGuidelines = document.getElementById('retrievalGuidelines').value;
+            const isRecyclable = document.getElementById('recyclable').value;
+      
+            const data = {
+                name: name,
+                description: description,
+                disposalGuidelines: disposalGuidelines,
+                retrivalGuidelines: retrievalGuidelines,
+                isRecyclable: isRecyclable
+            };
+
+            try {
+                const response = await fetch('http://localhost:8080/categories', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    const responseData = await response.json();
+                    alert('Waste category added ' + JSON.stringify(responseData));
+                } else {
+                    alert('Failed to upload category ' + response.statusText);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error uploading data');
+            }
+        }
+        document.getElementById('wasteCategoryForm').addEventListener('submit', submitForm);
+    </script>
+</body>
+</html>
