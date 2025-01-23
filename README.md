@@ -5,6 +5,9 @@
 ## !!! Instructions !!!
  - Clone the repo <br>
  - **Run** KeorapetseleballoApplication.java <br>
+ - For PATCH and POST, the static html files can be used to upload or update the specific fields <br>
+ - So to upload a category, http://localhost:8080/upload.html can be used etc.. **ONLY** changing the appended part after the port to required static file <br>
+   
    
    
 ### Endpoints
